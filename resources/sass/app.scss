@@ -1,0 +1,265 @@
+
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'bootswatch';
+@import 'animate';
+
+main {
+    margin-top: 1rem;
+}
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.parallax
+{
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax-main
+{
+    background-image: url('/img/footer-main.jpg');
+}
+.no-padding {
+    padding : 0;
+    margin : 0;
+}
+.front-block {
+    text-align: center;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    display: table;
+    width: 100%;
+    height: 50%;
+    color: $teal;
+}
+.front-block p {
+    margin: 0;
+}
+.front-block.first p {
+    line-height: 2em;
+    display: table-cell;
+    vertical-align: middle;
+}
+.front-block.first span {
+    font-weight: bold;
+    color: $green;
+}
+.front-block .first, .front-block .second {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+.front-block .second {
+    background-color: $pink;
+    color: $white;
+}
+.front-block form {
+    text-align: center;
+}
+.front-block input {
+    border: 0;
+    padding: 1em 2em;
+    margin: 0 auto 22px auto;
+    background: $white;
+    color: $gray-700;
+    font-size: 1em;
+    width: 80%;
+    text-align: center;
+    display: block;
+    line-height: 1.2em;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    white-space: normal;
+}
+.front-block input[type=submit] {
+    border: #fff 1px solid;
+    padding: 22px 44px;
+    margin: 0 auto;
+    background: none;
+    font-size: 22px;
+    width: 80%;
+    text-align: center;
+    display: block;
+    line-height: 1.2em;
+    cursor: pointer;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    white-space: normal;
+}
+.front-block input[type=submit]:hover {
+    background: #fff;
+    color: black;
+}
+.front-block .mc4wp-alert {
+    font-size: 18px;
+    padding: 11px 0 0 0;
+}
+@media (max-width: 1140px) {
+    .front-block {
+        font-size: 0.8em;
+    }
+}
+@media (max-width: 991px) {
+    .front-block {
+        padding-top: 1em;
+        height: auto;
+        font-size: 1em;
+    }
+    .front-block .second {
+        padding: 1.5em 0em;
+    }
+}
+.glyphicon-star:before {
+    content: "\e006"
+}
+.glyphicon-star-empty:before {
+    content: "\e007"
+}
+.card {
+    min-height: 200px;
+}
+.map {
+    overflow:hidden;
+    padding-bottom:30%;
+    position:relative;
+    height:0;
+}
+.map iframe {
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+.wow {
+    visibility: hidden;
+}
+.footer-text {
+    background-color: rgba($color: $white, $alpha: 0.6);
+}
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    perspective: 1500px;
+}
+#adminSidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: grey-800;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+#adminSidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+a[data-toggle="collapse"] {
+    position: relative;
+}
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: $gray-800;
+    cursor: pointer;
+}
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: $orange;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+}
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+@media (max-width: 768px) {
+    #adminSidebar {
+        margin-left: -250px;
+        transform: rotateY(100deg);
+    }
+    #adminSidebar.active {
+        margin-left: 0;
+        transform: none;
+    }
+    #sidebarCollapse span:first-of-type,
+    #sidebarCollapse span:nth-of-type(2),
+    #sidebarCollapse span:last-of-type {
+        transform: none;
+        opacity: 1;
+        margin: 5px auto;
+    }
+    #sidebarCollapse.active span {
+        margin: 0 auto;
+    }
+    #sidebarCollapse.active span:first-of-type {
+        transform: rotate(45deg) translate(2px, 2px);
+    }
+    #sidebarCollapse.active span:nth-of-type(2) {
+        opacity: 0;
+    }
+    #sidebarCollapse.active span:last-of-type {
+        transform: rotate(-45deg) translate(1px, -1px);
+    }
+}
+.table-btn {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    background-repeat: no-repeat;
+}
+.table-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-image: url('/img/spritesheet.png');
+    background-repeat: no-repeat
+}
+.table-btn-delete::before {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -5px;
+}
+.table-btn-edit::before {
+    width: 32px;
+    height: 32px;
+    background-position: -47px -5px;
+}
