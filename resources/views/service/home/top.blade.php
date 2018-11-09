@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="front-block align-middle wow zoomInRight">
-            <div class="second px-5">
+            <div class="second">
                 <span>Подпишитесь на наши новости</span>
                 <form method="post" action="#" id="mc4wp-form-1" class="form mc4wp-form">
                     <input type="email" id="email" name="email" required="" placeholder="email@server.com">

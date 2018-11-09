@@ -14336,6 +14336,7 @@ main {
 .front-block .second {
   background-color: #e83e8c;
   color: #fff;
+  padding: 1.5em 1.5em;
 }
 
 .front-block form {
@@ -14400,6 +14401,12 @@ main {
 
   .front-block .second {
     padding: 1.5em 0em;
+  }
+}
+
+@media (max-width: 320px) {
+  .front-block .second {
+    padding: 1em 0;
   }
 }
 

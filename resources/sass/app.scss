@@ -58,6 +58,7 @@ main {
 .front-block .second {
     background-color: $pink;
     color: $white;
+    padding: 1.5em 1.5em;
 }
 .front-block form {
     text-align: center;
@@ -118,6 +119,11 @@ main {
     }
     .front-block .second {
         padding: 1.5em 0em;
+    }
+}
+@media (max-width: 320px) {
+    .front-block .second {
+        padding: 1em 0;
     }
 }
 .glyphicon-star:before {

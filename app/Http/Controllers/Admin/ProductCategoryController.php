@@ -17,7 +17,7 @@ class ProductCategoryController extends Controller
     {
         return view(
             'admin.productcategories.index',
-            ['productCategories' => ProductCategory::paginate(15)]
+            ['productCategories' => ProductCategory::paginate()]
         );
     }
 
@@ -41,7 +41,7 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-       $request->validate(['name' => 'required|string|max:100']);
+        $request->validate(['name' => 'required|string|max:100']);
         ProductCategory::create($request->all());
         return redirect()->to($request->only('redirects_to')['redirects_to']);
     }

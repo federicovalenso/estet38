@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 Route::auth();
 Route::view('/', 'home');
 Route::group(
@@ -26,7 +27,5 @@ Route::group(
         Route::resource('productcategory', 'ProductCategoryController');
     }
 );
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/search/{search_string?}', 'ProductSearchController')->name('search');
