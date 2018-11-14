@@ -15,10 +15,15 @@ class ProductSearchController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $search_string = $request->only('search-string')['search-string'];
+        $search_string = "";
+        $products = [];
+        if ($request->has('query')) {
+            $search_string = $request->only('query')['query'];
+            $products = Product::search($search_string)->paginate();
+        }
         return view(
             'search',
-            ['products' => Product::search($search_string)->paginate()]
+            ['products' => $products]
         );
     }
 }
