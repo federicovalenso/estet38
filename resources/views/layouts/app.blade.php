@@ -73,14 +73,14 @@
                     </li>
                 </ul>
                 <form class="form-inline" method="GET" action="{{ route('search') }}">
-                    <input name="search-string" class="form-control mr-sm-2" type="search" placeholder="Найти услугу" aria-label="Search">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="Найти услугу" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
                 </form>
                 <ul class="navbar-nav">
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('auth.login') }}</a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
@@ -92,7 +92,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('auth.logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
