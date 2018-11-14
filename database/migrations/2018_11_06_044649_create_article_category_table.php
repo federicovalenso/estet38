@@ -16,7 +16,7 @@ class CreateArticleCategoryTable extends Migration
         Schema::create('article_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('article_id', false, true);
-            $table->foreign('article_id')->references('id')->on('articles');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->integer('category_id', false, true);
         });
     }
