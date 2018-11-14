@@ -1,0 +1,65 @@
+@setup
+    $user = 'user';
+    $timezone = 'Asia/Irkutsk';
+    $path = 'path/to/site';
+    $current = $path . '/current';
+    $repo = 'https://github.com/federicovalenso/estet38.git';
+    $branch = 'master';
+    $chmods = [
+        'storage/logs'
+    ];
+    $group = 'group';
+    $date = new DateTime('now', new DateTimeZone($timezone));
+    $release = $path . '/releases/' . $date->format('YmdHis');
+    $composer_phar = 'path/to/composer.phar';
+@endsetup
+
+@servers(['production' => $user . '@server.com'])
+
+@task('clone', ['on' => $on])
+    mkdir -p {{ $release }}
+    git clone --depth 1 -b {{ $branch }} "{{ $repo }}" {{ $release }}
+    echo "#1 - Repository's been cloned"
+@endtask
+
+@task('composer', ['on' => $on])
+    php {{ $composer_phar }} self-update;
+    cd {{ $release }}
+    php {{ $composer_phar }} install --no-interaction --no-dev --prefer-dist;
+    echo "#2 - Composerdependencies've been installed"
+@endtask
+
+@task('artisan', ['on' => $on])
+    cd {{ $release }}
+    ln -nfs {{ $path }}/.env .env;
+    chgrp -h {{ $group }} .env;
+    php artisan config:clear;
+    php artisan migrate;
+    php artisan clear-compiled --env=production;
+    echo "#3 - Production dependencies've been installed"
+@endtask
+
+@task('chmod', ['on' => $on])
+    chgrp -R planetazd {{ $release }}
+    chmod -R ug+rwx {{ $release }}
+    @foreach ($chmods as $file)
+        chmod -R 775 {{ $release }}/{{ $file }};
+        chown -R {{ $user }}:{{ $group }} {{ $release}}/{{ $file }}
+        echo "Permissions've been set for {{ $file }}"
+    @endforeach
+    echo "#4 - Permissions've been set"
+@endtask
+
+@task('update_symlinks')
+    ln -nfs {{ $release }} {{ $current }};
+    chgrp -h {{ $group }} {{ $current }};
+    echo "#5 - Symlink's been set"
+@endtask
+
+@macro('deploy', ['on' => 'production'])
+    clone
+    composer
+    artisan
+    chmod
+    update_symlinks
+@endmacro
