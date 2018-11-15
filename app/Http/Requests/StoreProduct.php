@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\ProductCategory;
 
 class StoreProduct extends FormRequest
 {
@@ -26,7 +27,13 @@ class StoreProduct extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'string|nullable',
-            'price' => 'required|numeric|min:0'
+            'price' => 'required|numeric|min:0',
+            'image' => 'image|mimes:jpeg,jpg,png,gif,svg|max:1024',
+            'category' => function ($attribute, $value, $fail) {
+                if (ProductCategory::find($value) === null) {
+                    $fail(trans('validation.category'));
+                }
+            },
         ];
     }
 }

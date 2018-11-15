@@ -39,13 +39,20 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreProduct  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreProduct $request)
     {
         $validated = $request->validated();
-        Product::create($validated->all());
+        $image_path = $this->uploadImage($request);
+        $product = new Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->category_id = $request->category;
+        $product->price = $request->price;
+        $product->image = $image_path;
+        $product->save();
         return redirect()->to($request->only('redirects_to')['redirects_to']);
     }
 
@@ -80,14 +87,22 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreProduct  $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProduct $request, Product $product)
     {
         $validated = $request->validated();
-        $product->update($validated->all());
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->category_id = $request->category;
+        $product->price = $request->price;
+        $image_path = $this->uploadImage($request);
+        if (!(empty($image_path))) {
+            $product->image = $image_path;
+        }
+        $product->save();
         return redirect()->to($request->only('redirects_to')['redirects_to']);
     }
 
@@ -100,5 +115,21 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+    /**
+     * Upload image from request
+     *
+     * @param  \App\Http\Requests\StoreProduct  $request
+     * @return  string $result
+     */
+    private function uploadImage(StoreProduct $request)
+    {
+        $result = "";
+        if ($request->hasFile('image')) {
+            if ($request->file('image')->isValid()) {
+                $result = $request->file('image')->store('uploads', 'public');
+            }
+        }
+        return $result;
     }
 }

@@ -10,7 +10,7 @@
                             Форма редактирования услуги
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('product.store') }}">
+                            <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 @include('admin.products.form')
                             </form>
