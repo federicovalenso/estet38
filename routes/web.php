@@ -21,7 +21,7 @@ Route::group(
         'middleware' => ['auth', 'role:admin']
     ],
     function () {
-        Route::view('/', 'admin.index');
+        Route::view('/', 'admin.index')->name('admin.index');
         Route::resource('category', 'CategoryController');
         Route::resource('product', 'ProductController');
         Route::resource('productcategory', 'ProductCategoryController');
