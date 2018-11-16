@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::auth();
 Route::view('/', 'home');
 Route::group(
@@ -18,7 +18,7 @@ Route::group(
         'name' => 'admin.',
         'prefix' => 'admin',
         'namespace' => 'Admin',
-        'middleware' => ['auth', 'role:admin']
+        'middleware' => ['auth', 'verified', 'role:admin']
     ],
     function () {
         Route::view('/', 'admin.index')->name('admin.index');
@@ -28,4 +28,4 @@ Route::group(
     }
 );
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search/{search_string?}', 'ProductSearchController')->name('search');
+Route::get('/search', 'ProductSearchController')->name('search');
